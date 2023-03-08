@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:14
+    container_name: dev_meeting_postgres
+    ports:
+      - "7878:5432"
+    environment:
+      - POSTGRES_PASSWORD=dev_meeting
+      - POSTGRES_USER=dev_meeting
+      - POSTGRES_DB=dev_meeting
+    restart: unless-stopped
+
