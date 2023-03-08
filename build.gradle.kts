@@ -32,6 +32,7 @@ dependencies {
     implementation("org.jooq:jooq-postgres-extensions:${jooq.version.get()}")
 
     implementation("org.jetbrains.kotlin:kotlin-script-runtime:1.8.10")
+    implementation("com.beust:klaxon:5.5")
 }
 
 object DB {
@@ -105,6 +106,16 @@ jooq {
                                 org.jooq.meta.jaxb.ForcedType().apply {
                                     name = "CLOB"
                                     includeTypes = "email"
+                                },
+                                org.jooq.meta.jaxb.ForcedType().apply {
+                                    userType = "com.fynnian.dev_meeting.jooqdevmeeting.OrgStatus"
+                                    isEnumConverter = true
+                                    includeTypes = "status"
+                                },
+                                org.jooq.meta.jaxb.ForcedType().apply {
+                                    userType = "com.fynnian.dev_meeting.jooqdevmeeting.Translation"
+                                    converter = "com.fynnian.dev_meeting.jooqdevmeeting.TranslationConverter"
+                                    includeExpression = ".*\\.name_localized"
                                 },
                             )
                         )
